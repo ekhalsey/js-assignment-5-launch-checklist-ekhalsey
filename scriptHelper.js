@@ -1,6 +1,6 @@
 // Write your helper functions here!
 require('isomorphic-fetch');
-
+console.log('hello');
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
    /*
@@ -16,13 +16,45 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    */
 }
 
-function validateInput(testInput) {
-   
-}
+// function validateInput(testInput) {
+// let input = testInput;
+//    if (input === '') {
+//         return "Empty";
+//    }
+//    else if (isNaN(input)) {
+//         return "Not a number";
+//    }
+//    else if (parseInt(input) === Number) {
+//         return "Is a number";
+//    }
+// }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+// function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+//     let validatedResult = validateInput(pilot);
+//     if (validatedResult === 'Empty') {
+
+//     }
+    
+    // let launchForm = document.getElementById("launchForm").value;
+
+    // launchForm.addEventListener('submit', (event) => {
+    //     if (pilot === "" || copilot === "" || fuelLevel === "" || cargoLevel === "") {
+    //         console.log('test');
+    //         alert("All fields are required!");
+    //         event.preventDefault();
+    //     };
+    // });
+    
    
-}
+//     let inputs = [pilot, copilot, fuelLevel, cargoLevel];
+//    let validatedResults = [];
+//    for (let i = 0; i < inputs.length; i++) {
+//        let validatedItem;
+//        validatedItem = validateInput(inputs[i]);
+//        validatedResults.push(validatedItem);
+//    }
+//    console.log(validatedResults);
+//}
 
 async function myFetch() {
     let planetsReturned;
