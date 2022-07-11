@@ -1,40 +1,18 @@
-const { myFetch } = require("./scriptHelper.js");
 
 // Write your JavaScript code here!
 window.addEventListener("load", function() {
+
+
+    // async function myFetch() {
+    //     let planetsReturned;
     
-    let validateInput = (testInput) => {
-        if (testInput === '') {
-            return "Empty";
-        }
-        else if (!isNaN(testInput)) {
-            return "Is a number";
-        }
-        else {
-            return "Not a number";
-        }
-    }
-    
-    function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-        const h2 = document.getElementById('launchStatus');
-        const pilotStatus = document.getElementById("pilotStatus");
-        const copilotStatus = document.getElementById("copilotStatus");
-        const fuelStatus = document.getElementById("fuelStatus");
-        const cargoStatus = document.getElementById("cargoStatus");
-        if (fuelLevel < 10000 || cargoLevel > 10000) {
-            list.style.visibility = 'visible';
-            h2.innerHTML = 'Shuttle not ready for launch';
-            h2.style.color = 'red';
-            pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
-            copilotStatus.innerHTML = `Copilot ${copilot} is ready for launch`;
-            if(fuelLevel < 10000) {fuelStatus.innerHTML = 'Fuel Level too low'};
-            if(cargoLevel > 10000) {cargoStatus.innerHTML = 'Too much cargo!'};
-        } else {
-            h2.innerHTML = 'Shuttle is ready for launch';
-            h2.style.color = 'green';
-            list.style.visibility = 'hidden';
-        }
-    }
+    //     planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
+    //         response.json().then((json) => {
+    //             json;
+    //         });
+    //     });
+    //     return planetsReturned;
+    // }
 
 
 let launchForm = document.getElementById("launchForm");
@@ -55,44 +33,54 @@ launchForm.addEventListener("submit", (event) => {
     list = document.getElementById('faultyItems');
     let pass = true;
 
-    if (validateInput(pilotName) === 'Empty' || validateInput(copilotName) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoMass) === 'Empty') {
-        pass = false;
-        alert('All fields are required.');
-        event.preventDefault();
-    }
-    
-    if (validateInput(pilotName) === 'Is a number' || validateInput(copilotName) === 'Is a number') {
-        pass = false;
-        alert('Names cannot contain numbers');
-        event.preventDefault();
-    } 
+    let usingValidateInput = () => {
+        if (validateInput(pilotName) === 'Empty' || validateInput(copilotName) === 'Empty' || validateInput(fuelLevel) === 'Empty' || validateInput(cargoMass) === 'Empty') {
+            pass = false;
+            alert('All fields are required.');
+            event.preventDefault();
+        }
+        
+        if (validateInput(pilotName) === 'Is a number' || validateInput(copilotName) === 'Is a number') {
+            pass = false;
+            alert('Names cannot contain numbers');
+            event.preventDefault();
+        } 
 
-    if (validateInput(fuelLevel) === 'Not a number' || validateInput(cargoMass) === 'Not a number') {
-        pass = false;
-        alert('Fuel Level and Cargo Mass must be numbers');
-        event.preventDefault();
+        if (validateInput(fuelLevel) === 'Not a number' || validateInput(cargoMass) === 'Not a number') {
+            pass = false;
+            alert('Fuel Level and Cargo Mass must be numbers');
+            event.preventDefault();
+        }
+        console.log(pass);
+        if (pass = false) {
+            event.preventDefault();
+            usingValidateInput();
+        } else {
+            formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoMass);
+            event.preventDefault();
+        }
     }
-    if (pass = false) {
-        event.preventDefault();
-    } else {
-        formSubmission(document, list, pilotName, copilotName, fuelLevel, cargoMass);
-        event.preventDefault();
-    }
-    
+    usingValidateInput();
 })
 
 
-
+ async function listedPlanetsFunction() {
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-   let listedPlanetsResponse;
-   listedPlanetsResponse.then(function (result) {
-       listedPlanets = result;
-       console.log(listedPlanets);
+   let listedPlanetsResponse = myFetch();
+   listedPlanetsResponse
+   .then(function (result) {
+        listedPlanets = result;
+        console.log('listedplanet response');
+        console.log(listedPlanetsResponse);
+        console.log(listedPlanets);
    }).then(function () {
-       console.log(listedPlanets);
+            console.log('random string 2');
+            console.log(listedPlanets);
        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
    })
+}
+listedPlanetsFunction();
    
 });
 
