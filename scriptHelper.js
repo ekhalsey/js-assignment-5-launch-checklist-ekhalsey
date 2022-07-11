@@ -2,17 +2,18 @@
 // require('isomorphic-fetch');
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
+   const missionTarget = document.getElementById('missionTarget');
+   missionTarget.innerHTML = `
+   <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name}</li>
+                    <li>Diameter: ${diameter} </li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons}</li>
                 </ol>
-                <img src="">
-   */
+                <img src="${imageUrl}">
+    `
 }
 
 let validateInput = (testInput) => {
@@ -48,39 +49,17 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     }
 }
 
-// async function myFetch() {
-//     let planetsReturned;
-
-//     planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
-//         response.json().then((json) => {
-//             console.log(json);
-//         });
-//     });
-
-//     return planetsReturned;
-// }
 async function myFetch() {
     let planetsReturned;
 
-    planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json')
-    .then((response) => response.json())
-    .then((planetArray) => {
-        console.log('in myFetch');
-        console.log(planetArray);
-        planetsReturned = planetArray;
-    });
+    planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
+        return response.json();
+        });
 
-    //     function(response) {
-    //     response.json()
-    //     .then( (json) => {
-    //         const array = json.value;
-    //         console.log(array);
-    //         return array;
-    //     });
-    // });
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
-}
+    let index = Math.floor(Math.random()*planets.length);
+    return planets[index];}
 
